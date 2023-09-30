@@ -37,7 +37,6 @@ function UserForm() {
         }
       })
       .catch((error) => {
-        // Handle errors here
         console.error("Error fetching data:", error);
       });
   }, []);
@@ -54,14 +53,11 @@ function UserForm() {
         axios.get(`http://api.geonames.org/childrenJSON?geonameId=${selectedCountryGeonameId}&username=abhishek_001`)
           .then((response) => {
             const data = response.data;
-            // console.log(data, "statesData");
             if (data.geonames && data.geonames.length > 0) {
-              // console.log(data.geonames[0].geonameId, "SJJJJJ")
               const stateNames = data.geonames.map((state) => ({
                 name: state.name,
                 geonameId: state.geonameId,
               }));
-              // console.log(stateNames, 'statesnamesssss')
               setStates(stateNames);
               setFormData({ ...formData, state: "" });
             }
@@ -72,13 +68,10 @@ function UserForm() {
       }
     }
   }, [formData.country, countries]);
-
-  //  console.log(states,  "statessssss")
    
 
    useEffect(() => {
     if (formData.state) {
-      // console.log(formData.state, "state");
       const selectedState = states.find((state) => state.name === formData.state);
       
       if (selectedState) {
@@ -87,7 +80,6 @@ function UserForm() {
         axios.get(`http://api.geonames.org/childrenJSON?geonameId=${selectedStateGeonameId}&username=abhishek_001`)
           .then((response) => {
             const data = response.data;
-            // console.log(data, "citiesData");
             if (data.geonames && data.geonames.length > 0) {
               const cityNames = data.geonames.map((city) => ({
                 name: city.name,
@@ -129,7 +121,6 @@ function UserForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData, "FORMDatas");
     try {
       const response = await axios.post("http://localhost:5000/api/addUser", formData, {
         headers: {
@@ -317,7 +308,7 @@ function UserForm() {
         className="form-control colorful-input"
         placeholder="Age"
         value={formData.age}
-        readOnly // Age is calculated automatically and should be read-only
+        readOnly 
       />
     </div>
     <button type="submit" className="btn btn-primary colorful-button">Save</button>

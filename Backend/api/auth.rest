@@ -1,0 +1,24 @@
+@host=http://localhost:5000/api 
+
+
+###
+POST {{host}}/addUser
+Content-Type: application/json
+
+{
+  "firstName": "Ritesh",
+  "lastName": "Gupta",
+  "email": "manisha@gmail.com",
+  "country": "India",
+  "state": "Uttar Pradesh",
+  "city": "Noida",
+  "gender": "Male",
+  "dateOfBirth":"2000-01-19",
+  "age": 12
+}
+
+
+###
+GET {{host}}/getUser
+?id=6517e928d16f39670e7e1433
+Content-Type: application/json
